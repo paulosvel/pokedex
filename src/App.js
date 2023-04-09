@@ -1,14 +1,16 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Select, MenuItem } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
+import types from "./types.css";
 
 function App() {
   const [pokemon, setAllPokemons] = useState([]);
   const [currentPokemon, setCurrentPokemon] = useState([]);
   const [search, setSearch] = useState("");
-  const [pokemonPerPage, setPokemonPerPage] = useState(10);
+  const [pokemonPerPage, setPokemonPerPage] = useState(25);
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentType, setCurrentType] = useState([]);
 
   async function getPokemons() {
     const response = await axios.get(
@@ -34,7 +36,7 @@ function App() {
       setCurrentPokemon(pokemonDetails);
     }
     getPokemonDetails();
-  }, [currentPokemon]);
+  }, [currentPokemon, currentType]);
 
   const handlePreviousClick = () => {
     setCurrentPage(currentPage - 1);
@@ -49,24 +51,147 @@ function App() {
     setCurrentPage(1);
   };
 
+  const handleChangeType = (event) => {
+    setCurrentType(event.target.value);
+  };
+
   // Filtering
   const filteredPokemon = currentPokemon.filter((item) =>
     item.name.includes(search.toLowerCase())
   );
 
+  const filteredTypes =
+    currentType.length > 0
+      ? filteredPokemon.filter((item) =>
+          item.types.some((type) =>
+            type.type.name.toLowerCase().includes(currentType.toLowerCase())
+          )
+        )
+      : filteredPokemon;
+
   // Pagination
   const indexOfLastPokemon = currentPage * pokemonPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
-  const Pokemon = filteredPokemon.slice(
-    indexOfFirstPokemon,
-    indexOfLastPokemon
-  );
+  const Pokemon = filteredTypes.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
   return (
     <>
       <Box
-        sx={{ paddingTop: "20px", display: "flex", justifyContent: "center" }}  
+        sx={{ paddingTop: "20px", display: "flex", justifyContent: "center" }}
       >
+        <Select
+          value={currentType}
+          onChange={handleChangeType}
+          sx={{ marginRight: "10px",}}
+        >
+          <Box sx={{textAlign:"right"}}>
+          <MenuItem sx={{ backgroundColor: "#DE5C32", border:"2px solid black" }} value="Filter by Type">
+            All
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#F5D447", border: "2px solid black" }}
+            value="electric"
+          >
+            Electric
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#4F91D7", border: "2px solid black", textAlign:"right" }}
+            value="water"
+          >
+            Water
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#F19D52", border: "2px solid black" }}
+            value="fire"
+          >
+            Fire
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#92C33B", border: "2px solid black" }}
+            value="grass"
+          >
+            Grass
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#73CFC1", border: "2px solid black" }}
+            value="ice"
+          >
+            Ice
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#CF3F6B", border: "2px solid black" }}
+            value="fighting"
+          >
+            Fighting
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#AC6BCA", border: "2px solid black" }}
+            value="poison"
+          >
+            Poison
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#DA7943", border: "2px solid black" }}
+            value="ground"
+          >
+            Ground
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#91ABDF", border: "2px solid black" }}
+            value="flying"
+          >
+            Flying
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#ED7079", border: "2px solid black" }}
+            value="psychic"
+          >
+            Psychic
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#92C33B", border: "2px solid black" }}
+            value="bug"
+          >
+            Bug
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#C6B88D", border: "2px solid black" }}
+            value="rock"
+          >
+            Rock
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#5169AE", border: "2px solid black" }}
+            value="ghost"
+          >
+            Ghost
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#2F6EC4", border: "2px solid black" }}
+            value="dragon"
+          >
+            Dragon
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#595365", border: "2px solid black" }}
+            value="dark"
+          >
+            Dark
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#668EA1", border: "2px solid black" }}
+            value="steel"
+          >
+            Steel
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: "#EC90E7", border: "2px solid black" }}
+            value="fairy"
+          >
+            Fairy
+          </MenuItem>
+          </Box>
+        </Select>
         <TextField
           sx={{ width: "20%" }}
           label="Search Pokemon"
@@ -74,29 +199,90 @@ function App() {
           onChange={handleChange}
         />
       </Box>
-      <Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          width: "100%",
+          flexDirection: "row",
+          flexWrap: "wrap",
+        }}
+      >
         {Pokemon.map((item) => {
           const pokemonId = item.url && item.url.split("/")[6];
+          const backgroundColor =
+            item.types &&
+            (item.types[0].type.name === "electric"
+              ? "#F5D447"
+              : item.types[0].type.name === "grass"
+              ? "#92C33B"
+              : item.types[0].type.name === "poison"
+              ? "#AC6BCA"
+              : item.types[0].type.name === "bug"
+              ? "#92C33B"
+              : item.types[0].type.name === "normal"
+              ? "#949BA3"
+              : item.types[0].type.name === "fire"
+              ? "#F19D52"
+              : item.types[0].type.name === "water"
+              ? "#4F91D7"
+              : item.types[0].type.name === "fighting"
+              ? "#CF3F6B"
+              : item.types[0].type.name === "ground"
+              ? "#DA7943"
+              : item.types[0].type.name === "psychic"
+              ? "#ED7079"
+              : item.types[0].type.name === "rock"
+              ? "#C6B88D"
+              : item.types[0].type.name === "ghost"
+              ? "#5169AE"
+              : item.types[0].type.name === "dragon"
+              ? "#2F6EC4"
+              : item.types[0].type.name === "dark"
+              ? "#595365"
+              : item.types[0].type.name === "steel"
+              ? "#668EA1"
+              : item.types[0].type.name === "fairy"
+              ? "#EC90E7"
+              : item.types[0].type.name === "ice"
+              ? "#73CFC1"
+              : "white");
 
           return (
             <>
-              <Box>
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
-                  alt={item.name}
-                />
-              </Box>
-              <Box key={item.name}>
-                {item.name}
-                {item.types &&
-                  item.types.map((type) => (
-                    <span key={type.type.name}> {type.type.name}</span>
-                  ))}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "20%",
+                  flexDirection: "row",
+                  backgroundColor: backgroundColor,
+                }}
+              >
+                <Box>
+                  <img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
+                    alt={item.name}
+                  />
+                </Box>
+                <Box key={item.name}>
+                  <Box sx={{ fontFamily: "Cursive", fontWeight: "500" }}>
+                    {item.name}
+                  </Box>
+                  <Box>
+                    {item.types &&
+                      item.types.map((type) => (
+                        <span key={type.type.name}> {type.type.name}</span>
+                      ))}
+                  </Box>
+                </Box>
               </Box>
             </>
           );
         })}
       </Box>
+
       <Box
         sx={{
           display: "flex",

@@ -1,0 +1,9 @@
+.grass {
+    color: green;
+  }
+  .fire {
+    border: 2px solid red;
+  }
+  .water {
+    border: 2px solid blue;
+  }
