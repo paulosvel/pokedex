@@ -78,14 +78,14 @@ function App() {
   return (
     <>
       <Box
-        sx={{ paddingTop: "20px", display: "flex", justifyContent: "center", }}
+        sx={{ paddingTop: "20px", display: "flex", justifyContent: "center",}}
       >
         <Select
           value={currentType}
           onChange={handleChangeType}
           sx={{ marginRight: "10px", }}
         >
-          <MenuItem  sx={{ backgroundColor: "#DE5C32", border:"2px solid black" }} value="Filter by Type">
+          <MenuItem  sx={{ marginTop:"-8px",backgroundColor: "#DE5C32", border:"2px solid black" }} value="Filter by Type">
             All
           </MenuItem>
           <MenuItem
@@ -185,7 +185,7 @@ function App() {
             Steel
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#EC90E7", border: "2px solid black" }}
+            sx={{ marginBottom:"-8px", backgroundColor: "#EC90E7", border: "2px solid black" }}
             value="fairy"
           >
             Fairy
