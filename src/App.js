@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import types from "./types.css";
+import { Close } from "@mui/icons-material";
 
 function App() {
   const [pokemon, setAllPokemons] = useState([]);
   const [currentPokemon, setCurrentPokemon] = useState([]);
   const [search, setSearch] = useState("");
-  const [pokemonPerPage, setPokemonPerPage] = useState(25);
+  const [pokemonPerPage, setPokemonPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentType, setCurrentType] = useState([]);
 
@@ -77,15 +78,14 @@ function App() {
   return (
     <>
       <Box
-        sx={{ paddingTop: "20px", display: "flex", justifyContent: "center" }}
+        sx={{ paddingTop: "20px", display: "flex", justifyContent: "center", }}
       >
         <Select
           value={currentType}
           onChange={handleChangeType}
-          sx={{ marginRight: "10px",}}
+          sx={{ marginRight: "10px", }}
         >
-          <Box sx={{textAlign:"right"}}>
-          <MenuItem sx={{ backgroundColor: "#DE5C32", border:"2px solid black" }} value="Filter by Type">
+          <MenuItem  sx={{ backgroundColor: "#DE5C32", border:"2px solid black" }} value="Filter by Type">
             All
           </MenuItem>
           <MenuItem
@@ -95,7 +95,7 @@ function App() {
             Electric
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#4F91D7", border: "2px solid black", textAlign:"right" }}
+            sx={{ backgroundColor: "#4F91D7", border: "2px solid black" }}
             value="water"
           >
             Water
@@ -190,7 +190,6 @@ function App() {
           >
             Fairy
           </MenuItem>
-          </Box>
         </Select>
         <TextField
           sx={{ width: "20%" }}
@@ -258,6 +257,7 @@ function App() {
                   width: "20%",
                   flexDirection: "row",
                   backgroundColor: backgroundColor,
+                  margin:"20px"
                 }}
               >
                 <Box>
