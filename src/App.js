@@ -4,6 +4,26 @@ import axios from "axios";
 import "./App.css";
 import types from "./types.css";
 import { Close } from "@mui/icons-material";
+import bug from './typeimgs/Bug type.png';
+import fire from './typeimgs/Fire type.png';
+import grass from './typeimgs/Grass type.png';
+import flying from './typeimgs/Flying type.png';
+import fighting from './typeimgs/Fighting type.png';
+import poison from './typeimgs/Poison type.png';
+import ground from './typeimgs/Ground type.png';
+import rock from './typeimgs/Rock type.png';
+import water from './typeimgs/Water type.png';
+import psychic from './typeimgs/Psychic type.png';
+import dragon from './typeimgs/Dragon type.png';
+import electric from './typeimgs/Electric type.png';
+import fairy from './typeimgs/Fairy type.png';
+import normal from './typeimgs/Normal type.png';
+import ghost from './typeimgs/Ghost type.png';
+import steel from './typeimgs/Steel type.png';
+import ice from './typeimgs/Ice type.png';
+
+
+
 
 function App() {
   const [pokemon, setAllPokemons] = useState([]);
@@ -78,118 +98,135 @@ function App() {
   return (
     <>
       <Box
-        sx={{ paddingTop: "20px", display: "flex", justifyContent: "center",}}
+        sx={{ paddingTop: "20px", display: "flex", justifyContent: "center" }}
       >
         <Select
           value={currentType}
           onChange={handleChangeType}
           sx={{ marginRight: "10px", }}
         >
-          <MenuItem  sx={{ marginTop:"-8px",backgroundColor: "#DE5C32", border:"2px solid black" }} value="Filter by Type">
+        
+          <MenuItem
+            sx={{
+              marginTop: "-8px",
+              backgroundColor: "#DE5C32",
+              border: "2px solid black",
+              
+              
+            }}
+            value="Filter by Type"
+          >
             All
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#F5D447", border: "2px solid black" }}
+            sx={{ backgroundColor: "#F5D447", border: "2px solid black",  gap:"0.5rem", padding:"2px" }}
             value="electric"
           >
+            <img style={{}} src={electric} width="25px" height="25px" ></img>
             Electric
+ 
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#4F91D7", border: "2px solid black" }}
+            sx={{ backgroundColor: "#4F91D7", border: "2px solid black", }}
             value="water"
           >
             Water
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#F19D52", border: "2px solid black" }}
+            sx={{ backgroundColor: "#F19D52", border: "2px solid black", }}
             value="fire"
           >
             Fire
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#92C33B", border: "2px solid black" }}
+            sx={{ backgroundColor: "#92C33B", border: "2px solid black",}}
             value="grass"
           >
             Grass
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#73CFC1", border: "2px solid black" }}
+            sx={{ backgroundColor: "#73CFC1", border: "2px solid black", }}
             value="ice"
           >
             Ice
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#CF3F6B", border: "2px solid black" }}
+            sx={{ backgroundColor: "#CF3F6B", border: "2px solid black", }}
             value="fighting"
           >
             Fighting
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#AC6BCA", border: "2px solid black" }}
+            sx={{ backgroundColor: "#AC6BCA", border: "2px solid black", }}
             value="poison"
           >
             Poison
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#DA7943", border: "2px solid black" }}
+            sx={{ backgroundColor: "#DA7943", border: "2px solid black", }}
             value="ground"
           >
             Ground
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#91ABDF", border: "2px solid black" }}
+            sx={{ backgroundColor: "#91ABDF", border: "2px solid black", }}
             value="flying"
           >
             Flying
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#ED7079", border: "2px solid black" }}
+            sx={{ backgroundColor: "#ED7079", border: "2px solid black", }}
             value="psychic"
           >
             Psychic
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#92C33B", border: "2px solid black" }}
+            sx={{ backgroundColor: "#92C33B", border: "2px solid black", }}
             value="bug"
           >
             Bug
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#C6B88D", border: "2px solid black" }}
+            sx={{ backgroundColor: "#C6B88D", border: "2px solid black", }}
             value="rock"
           >
             Rock
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#5169AE", border: "2px solid black" }}
+            sx={{ backgroundColor: "#5169AE", border: "2px solid black", }}
             value="ghost"
           >
             Ghost
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#2F6EC4", border: "2px solid black" }}
+            sx={{ backgroundColor: "#2F6EC4", border: "2px solid black", }}
             value="dragon"
           >
             Dragon
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#595365", border: "2px solid black" }}
+            sx={{ backgroundColor: "#595365", border: "2px solid black", }}
             value="dark"
           >
             Dark
           </MenuItem>
           <MenuItem
-            sx={{ backgroundColor: "#668EA1", border: "2px solid black" }}
+            sx={{ backgroundColor: "#668EA1", border: "2px solid black", }}
             value="steel"
           >
             Steel
           </MenuItem>
           <MenuItem
-            sx={{ marginBottom:"-8px", backgroundColor: "#EC90E7", border: "2px solid black" }}
+            sx={{
+              marginBottom: "-8px",
+              backgroundColor: "#EC90E7",
+              border: "2px solid black",
+            }}
             value="fairy"
           >
             Fairy
           </MenuItem>
+     
         </Select>
         <TextField
           sx={{ width: "20%" }}
@@ -257,7 +294,7 @@ function App() {
                   width: "20%",
                   flexDirection: "row",
                   backgroundColor: backgroundColor,
-                  margin:"20px"
+                  margin: "20px",
                 }}
               >
                 <Box>
