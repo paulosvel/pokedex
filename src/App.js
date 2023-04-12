@@ -31,6 +31,8 @@ import steel from "./typeimgs/Steel type.png";
 import ice from "./typeimgs/Ice type.png";
 import dark from "./typeimgs/Dark type.png";
 import ClearIcon from "@mui/icons-material/Clear";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { GitHub } from "@mui/icons-material";
 
 function App() {
   const [pokemon, setAllPokemons] = useState([]);
@@ -51,6 +53,14 @@ function App() {
   useEffect(() => {
     getPokemons();
   }, []);
+
+  const linkedinlink = () => {
+    window.open("https://www.linkedin.com/in/paulos-velissarakos", "_blank");
+  };
+
+  const githublink = () => {
+    window.open("https://github.com/paulosvel", "_blank");
+  };
 
   useEffect(() => {
     async function getPokemonDetails() {
@@ -109,6 +119,23 @@ function App() {
 
   return (
     <>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "right",
+          gap: "0.5rem",
+          margin: "10px",
+        }}
+      >
+        <GitHub
+          onClick={githublink}
+          sx={{ color: "white", cursor: "pointer" }}
+        ></GitHub>
+        <LinkedInIcon
+          onClick={linkedinlink}
+          sx={{ color: "white", cursor: "pointer" }}
+        ></LinkedInIcon>
+      </Box>
       <Box
         sx={{ display: "flex", justifyContent: "center", marginTop: "10px" }}
       >
@@ -429,7 +456,13 @@ function App() {
                   <Box>
                     {item.types &&
                       item.types.map((type) => (
-                        <span key={type.type.name}> {type.type.name}</span>
+                        <span
+                          style={{ fontFamily: "Montserrat" }}
+                          key={type.type.name}
+                        >
+                          {" "}
+                          {type.type.name}
+                        </span>
                       ))}
                   </Box>
                 </Box>
