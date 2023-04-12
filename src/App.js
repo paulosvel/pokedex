@@ -7,9 +7,11 @@ import {
   InputLabel,
   FormControl,
 } from "@mui/material";
+import logo from "./logo.png";
+import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Close } from "@mui/icons-material";
+import { Clear, Close } from "@mui/icons-material";
 import bug from "./typeimgs/Bug type.png";
 import fire from "./typeimgs/Fire type.png";
 import grass from "./typeimgs/Grass type.png";
@@ -28,6 +30,7 @@ import ghost from "./typeimgs/Ghost type.png";
 import steel from "./typeimgs/Steel type.png";
 import ice from "./typeimgs/Ice type.png";
 import dark from "./typeimgs/Dark type.png";
+import ClearIcon from "@mui/icons-material/Clear";
 
 function App() {
   const [pokemon, setAllPokemons] = useState([]);
@@ -76,14 +79,19 @@ function App() {
     setCurrentPage(1);
   };
 
-  const handleChangeType = (event) => {
-    setCurrentType(event.target.value);
-  };
-
   // Filtering
   const filteredPokemon = currentPokemon.filter((item) =>
     item.name.includes(search.toLowerCase())
   );
+
+  const handleChangeType = (event) => {
+    const value = event.target.value;
+    if (value === "clear") {
+      setCurrentType("");
+    } else {
+      setCurrentType(value);
+    }
+  };
 
   const filteredTypes =
     currentType.length > 0
@@ -98,12 +106,16 @@ function App() {
   const indexOfLastPokemon = currentPage * pokemonPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
   const Pokemon = filteredTypes.slice(indexOfFirstPokemon, indexOfLastPokemon);
-  
+
   return (
     <>
-    <Box sx={{backgroundColor:"#ebe4fd", padding:"80px"}}>
       <Box
-        sx={{ paddingTop: "20px", display: "flex", justifyContent: "center",}}
+        sx={{ display: "flex", justifyContent: "center", marginTop: "10px" }}
+      >
+        <img width="250px" height="auto" src={logo}></img>
+      </Box>
+      <Box
+        sx={{ paddingTop: "20px", display: "flex", justifyContent: "center" }}
       >
         <FormControl variant="standard">
           <InputLabel>Filter By Type</InputLabel>
@@ -113,14 +125,16 @@ function App() {
             sx={{ marginRight: "30px", width: "150px" }}
           >
             <MenuItem
-            
               sx={{
                 marginTop: "-8px",
                 backgroundColor: "#DE5C32",
                 border: "2px solid black",
+                gap: "0.5rem",
+                padding: "2px",
               }}
-              value="Filter by Type"
+              value="clear"
             >
+              <ClearIcon sx={{ width: "20px", height: "20px" }}></ClearIcon>
               Clear
             </MenuItem>
             <MenuItem
@@ -129,7 +143,6 @@ function App() {
                 border: "2px solid black",
                 gap: "0.5rem",
                 padding: "2px",
-  
               }}
               value="electric"
             >
@@ -347,9 +360,7 @@ function App() {
           flexWrap: "wrap",
         }}
       >
-      
         {Pokemon.map((item) => {
-          
           const pokemonId = item.url && item.url.split("/")[6];
           const backgroundColor =
             item.types &&
@@ -390,7 +401,7 @@ function App() {
               : item.types[0].type.name === "flying"
               ? "#91ABDF"
               : "white");
-              
+
           return (
             <>
               <Box
@@ -402,7 +413,7 @@ function App() {
                   flexDirection: "row",
                   backgroundColor: backgroundColor,
                   margin: "20px",
-                  borderRadius:"1rem" 
+                  borderRadius: "1rem",
                 }}
               >
                 <Box>
@@ -437,7 +448,7 @@ function App() {
         }}
       >
         <Button
-          sx={{ width: "100px" }}
+          sx={{ width: "100px", backgroundColor: "#de5c32" }}
           variant="contained"
           disabled={currentPage === 1}
           onClick={handlePreviousClick}
@@ -446,7 +457,7 @@ function App() {
         </Button>
         <Box sx={{ width: "10px" }}></Box>
         <Button
-          sx={{ width: "100px" }}
+          sx={{ width: "100px", backgroundColor: "#de5c32" }}
           variant="contained"
           disabled={Pokemon.length < pokemonPerPage}
           onClick={handleNextClick}
@@ -454,9 +465,7 @@ function App() {
           Next
         </Button>
       </Box>
-      </Box>
     </>
-    
   );
 }
 
